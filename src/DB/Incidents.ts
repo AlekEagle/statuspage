@@ -1,4 +1,4 @@
-import { sequelize, init as initDB } from '..';
+import { sequelize, init as initDB } from '.';
 import { Model, DataTypes } from 'sequelize';
 
 initDB();
