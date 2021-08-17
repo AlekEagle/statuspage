@@ -1,7 +1,7 @@
-import { sequelize, init as dbInit } from '..';
-import { Model, Op, DataTypes } from 'sequelize';
+import { sequelize, init as initDB } from '..';
+import { Model, DataTypes } from 'sequelize';
 
-dbInit();
+initDB();
 
 export default class Users extends Model {}
 

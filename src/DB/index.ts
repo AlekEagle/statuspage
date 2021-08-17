@@ -18,7 +18,7 @@ export async function init() {
         logging: false
       }
     );
-    await testConnection();
+    if (!(await testConnection())) throw 'Connection Failed.';
     return true;
   }
   return false;
