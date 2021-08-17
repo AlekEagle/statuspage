@@ -1,9 +1,10 @@
 import * as express from 'express';
 import dotenvConfig from './dotenv';
-import DB from './DB';
+import { init as initDB } from './DB';
 
 (async function () {
   await dotenvConfig();
+  await initDB();
 })();
 
 const app = express(),
