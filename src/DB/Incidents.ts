@@ -5,23 +5,23 @@ initDB();
 
 export enum IncidentStatus {
   //Realtime Incidents
-  Investigating = 1 << 0, // Have knowledge that something is going on, locating root cause.
-  Identified = 1 << 1, // Identified root cause, beginning to work on fixes.
-  Monitoring = 1 << 2, // Fixes have been deployed, confirming that aforementioned fix resolves issue.
-  Resolved = 1 << 3, // Issue has been successfully resolved.
+  Investigating, // Have knowledge that something is going on, locating root cause.
+  Identified, // Identified root cause, beginning to work on fixes.
+  Monitoring, // Fixes have been deployed, confirming that aforementioned fix resolves issue.
+  Resolved, // Issue has been successfully resolved.
   //Scheduled Incidents
-  Scheduled = 1 << 4, // Scheduled to occur at a later date.
-  InProgress = 1 << 5, // Scheduled event in progress.
-  Verifying = 1 << 6, // Verifying integrity.
-  Completed = 1 << 7 // Scheduled event completed successfully.
+  Scheduled, // Scheduled to occur at a later date.
+  InProgress, // Scheduled event in progress.
+  Verifying, // Verifying integrity.
+  Completed // Scheduled event completed successfully.
 }
 
 export enum IncidentSeverity {
-  None = 1 << 0, // No impact.
-  Maintenance = 1 << 1, // No expected impact, may not be guaranteed.
-  Minor = 1 << 2, // May cause some slowdowns, and/or cause a few features to fail.
-  Major = 1 << 3, // Most likely will cause slowdowns, and several features are inoperable.
-  Critical = 1 << 4 // Effectively offline, or completely unusable.
+  None, // No impact.
+  Maintenance, // No expected impact, may not be guaranteed.
+  Minor, // May cause some slowdowns, and/or cause a few features to fail.
+  Major, // Most likely will cause slowdowns, and several features are inoperable.
+  Critical // Effectively offline, or completely unusable.
 }
 
 export default class Incidents extends Model {
@@ -34,6 +34,8 @@ export default class Incidents extends Model {
     autoCompleted: boolean;
     autoInProgress: boolean;
   };
+  createdAt!: Date;
+  updatedAt!: Date;
   updates: string[];
   notify!: boolean;
   affects!: string[];
