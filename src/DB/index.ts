@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import dotenvConfig from '../dotenv';
+import dotenvConfig from '../utils/dotenv';
 
 let __sequelize: Sequelize;
 

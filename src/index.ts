@@ -1,5 +1,5 @@
 import * as express from 'express';
-import dotenvConfig from './dotenv';
+import dotenvConfig from './utils/dotenv';
 import { init as initDB } from './DB';
 
 (async function () {

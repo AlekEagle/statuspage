@@ -3,7 +3,7 @@ import { Model, DataTypes } from 'sequelize';
 
 initDB();
 
-export enum Status {
+export enum IncidentStatus {
   //Realtime Incidents
   Investigating = 1 << 0, // Have knowledge that something is going on, locating root cause.
   Identified = 1 << 1, // Identified root cause, beginning to work on fixes.
@@ -16,7 +16,7 @@ export enum Status {
   Completed = 1 << 7 // Scheduled event completed successfully.
 }
 
-export enum Severity {
+export enum IncidentSeverity {
   None = 1 << 0, // No impact.
   Maintenance = 1 << 1, // No expected impact, may not be guaranteed.
   Minor = 1 << 2, // May cause some slowdowns, and/or cause a few features to fail.
@@ -26,10 +26,15 @@ export enum Severity {
 
 export default class Incidents extends Model {
   id!: string;
-  severity!: Severity;
-  status!: Status;
-  scheduledFor!: Date;
-  scheduledUntil!: Date;
+  severity!: IncidentSeverity;
+  status!: IncidentStatus;
+  schedule!: {
+    scheduledFor: string;
+    scheduledUntil: string;
+    autoCompleted: boolean;
+    autoInProgress: boolean;
+  };
+  updates: string[];
   notify!: boolean;
   affects!: string[];
 }
@@ -40,8 +45,8 @@ Incidents.init(
     title: DataTypes.STRING,
     severity: DataTypes.SMALLINT,
     status: DataTypes.SMALLINT,
-    scheduledFor: DataTypes.DATE,
-    scheduledUntil: DataTypes.DATE,
+    schedule: DataTypes.JSON,
+    updates: DataTypes.ARRAY(DataTypes.STRING(12)),
     notify: DataTypes.BOOLEAN,
     affects: DataTypes.ARRAY(DataTypes.STRING(12))
   },
